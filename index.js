@@ -2,13 +2,48 @@ const chatLog = document.getElementById('chat-log'),
     userInput = document.getElementById('user-input'),
     sendButton = document.getElementById('send-button'),
     buttonIcon = document.getElementById('button-icon'),
-    info = document.querySelector('.info');
+    info = document.querySelector('.info'),
+    themeToggle = document.getElementById('theme-toggle'),
+    scrollRegion = document.getElementById('scroll-region');
+
+// Theme setup
+(function initTheme(){
+    try {
+        const saved = localStorage.getItem('theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+        updateThemeIcon();
+    } catch (_) {}
+})();
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        const next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (_) {}
+        updateThemeIcon();
+    });
+}
+
+function updateThemeIcon(){
+    const isLight = (document.documentElement.getAttribute('data-theme') === 'light');
+    const i = themeToggle?.querySelector('i');
+    if (!i) return;
+    i.className = isLight ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+}
 
 sendButton.addEventListener('click', sendMessage);
+// Textarea behavior: Enter to send, Shift+Enter for newline
 userInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
         sendMessage();
     }
+});
+// Auto-resize textarea
+userInput.addEventListener('input', () => {
+    userInput.style.height = 'auto';
+    userInput.style.height = Math.min(userInput.scrollHeight, 180) + 'px';
 });
 
 function sendMessage() {
@@ -38,6 +73,8 @@ function sendMessage() {
     // appends users message to screen
     appendMessage('user', message);
     userInput.value = '';
+    userInput.dispatchEvent(new Event('input'));
+    sendButton.disabled = true;
 
     const options = {
         method: 'POST',
@@ -62,12 +99,16 @@ function sendMessage() {
 
         buttonIcon.classList.add('fa-solid', 'fa-paper-plane');
         buttonIcon.classList.remove('fas', 'fa-spinner', 'fa-pulse');
+        sendButton.disabled = false;
     }).catch((err) => {
         if (err.name === 'TypeError') {
             appendMessage('bot', 'Error : Check Your Api Key!');
-            buttonIcon.classList.add('fa-solid', 'fa-paper-plane');
-            buttonIcon.classList.remove('fas', 'fa-spinner', 'fa-pulse');
+        } else {
+            appendMessage('bot', 'An error occurred.');
         }
+        buttonIcon.classList.add('fa-solid', 'fa-paper-plane');
+        buttonIcon.classList.remove('fas', 'fa-spinner', 'fa-pulse');
+        sendButton.disabled = false;
     });
 }
 
@@ -82,9 +123,9 @@ function appendMessage(sender, message) {
     const chatElement = document.createElement('div');
     const icon = document.createElement('i');
 
-    chatElement.classList.add("chat-box");
+    chatElement.classList.add("chat-box", "row", sender === 'user' ? 'user-row' : 'bot-row');
     iconElement.classList.add("icon");
-    messageElement.classList.add(sender);
+    messageElement.classList.add('bubble', sender);
     messageElement.innerText = message;
 
     // add icons depending on who send message bot or user
@@ -100,6 +141,14 @@ function appendMessage(sender, message) {
     chatElement.appendChild(iconElement);
     chatElement.appendChild(messageElement);
     chatLog.appendChild(chatElement);
-    chatLog.scrollTo = chatLog.scrollHeight;
+    // smooth scroll to bottom
+    requestAnimationFrame(() => {
+        const container = scrollRegion || document.querySelector('.chat-container');
+        if (container) {
+            container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+        } else {
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+    });
 
 }
