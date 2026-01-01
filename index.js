@@ -6,31 +6,7 @@ const chatLog = document.getElementById('chat-log'),
     themeToggle = document.getElementById('theme-toggle'),
     scrollRegion = document.getElementById('scroll-region');
 
-// Theme setup
-(function initTheme(){
-    try {
-        const saved = localStorage.getItem('theme');
-        if (saved) document.documentElement.setAttribute('data-theme', saved);
-        updateThemeIcon();
-    } catch (_) {}
-})();
 
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme') || 'dark';
-        const next = current === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', next);
-        try { localStorage.setItem('theme', next); } catch (_) {}
-        updateThemeIcon();
-    });
-}
-
-function updateThemeIcon(){
-    const isLight = (document.documentElement.getAttribute('data-theme') === 'light');
-    const i = themeToggle?.querySelector('i');
-    if (!i) return;
-    i.className = isLight ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-}
 
 sendButton.addEventListener('click', sendMessage);
 // Textarea behavior: Enter to send, Shift+Enter for newline
