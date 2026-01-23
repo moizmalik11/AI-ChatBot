@@ -25,6 +25,12 @@ if (themeToggle) {
     });
 }
 
+function updateThemeIcon() {
+    const isLight = (document.documentElement.getAttribute('data-theme') === 'light');
+    const i = themeToggle?.querySelector('i');
+    if (!i) return;
+    i.className = isLight ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+}
 
 sendButton.addEventListener('click', sendMessage);
 // Textarea behavior: Enter to send, Shift+Enter for newline
