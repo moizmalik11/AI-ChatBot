@@ -141,14 +141,5 @@ function appendMessage(sender, message) {
     chatElement.appendChild(iconElement);
     chatElement.appendChild(messageElement);
     chatLog.appendChild(chatElement);
-    // smooth scroll to bottom
-    requestAnimationFrame(() => {
-        const container = scrollRegion || document.querySelector('.chat-container');
-        if (container) {
-            container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
-        } else {
-            chatLog.scrollTop = chatLog.scrollHeight;
-        }
-    });
 
 }
