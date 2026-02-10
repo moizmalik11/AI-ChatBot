@@ -100,46 +100,36 @@ function sendMessage() {
         buttonIcon.classList.add('fa-solid', 'fa-paper-plane');
         buttonIcon.classList.remove('fas', 'fa-spinner', 'fa-pulse');
         sendButton.disabled = false;
-    }).catch((err) => {
-        if (err.name === 'TypeError') {
-            appendMessage('bot', 'Error : Check Your Api Key!');
+    }).
+
+    function appendMessage(sender, message) {
+        info.style.display = "none";
+        // change send button icon to loading using fontawesome
+        buttonIcon.classList.remove('fa-solid', 'fa-paper-plane');
+        buttonIcon.classList.add('fas', 'fa-spinner', 'fa-pulse');
+
+        const messageElement = document.createElement('div');
+        const iconElement = document.createElement('div');
+        const chatElement = document.createElement('div');
+        const icon = document.createElement('i');
+
+        chatElement.classList.add("chat-box", "row", sender === 'user' ? 'user-row' : 'bot-row');
+        iconElement.classList.add("icon");
+        messageElement.classList.add('bubble', sender);
+        messageElement.innerText = message;
+
+        // add icons depending on who send message bot or user
+        if (sender === 'user') {
+            icon.classList.add('fa-regular', 'fa-user');
+            iconElement.setAttribute('id', 'user-icon');
         } else {
-            appendMessage('bot', 'An error occurred.');
+            icon.classList.add('fa-solid', 'fa-robot');
+            iconElement.setAttribute('id', 'bot-icon');
         }
-        buttonIcon.classList.add('fa-solid', 'fa-paper-plane');
-        buttonIcon.classList.remove('fas', 'fa-spinner', 'fa-pulse');
-        sendButton.disabled = false;
-    });
-}
 
-function appendMessage(sender, message) {
-    info.style.display = "none";
-    // change send button icon to loading using fontawesome
-    buttonIcon.classList.remove('fa-solid', 'fa-paper-plane');
-    buttonIcon.classList.add('fas', 'fa-spinner', 'fa-pulse');
+        iconElement.appendChild(icon);
+        chatElement.appendChild(iconElement);
+        chatElement.appendChild(messageElement);
+        chatLog.appendChild(chatElement);
 
-    const messageElement = document.createElement('div');
-    const iconElement = document.createElement('div');
-    const chatElement = document.createElement('div');
-    const icon = document.createElement('i');
-
-    chatElement.classList.add("chat-box", "row", sender === 'user' ? 'user-row' : 'bot-row');
-    iconElement.classList.add("icon");
-    messageElement.classList.add('bubble', sender);
-    messageElement.innerText = message;
-
-    // add icons depending on who send message bot or user
-    if (sender === 'user') {
-        icon.classList.add('fa-regular', 'fa-user');
-        iconElement.setAttribute('id', 'user-icon');
-    } else {
-        icon.classList.add('fa-solid', 'fa-robot');
-        iconElement.setAttribute('id', 'bot-icon');
     }
-
-    iconElement.appendChild(icon);
-    chatElement.appendChild(iconElement);
-    chatElement.appendChild(messageElement);
-    chatLog.appendChild(chatElement);
-
-}
