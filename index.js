@@ -100,16 +100,11 @@ function sendMessage() {
         buttonIcon.classList.add('fa-solid', 'fa-paper-plane');
         buttonIcon.classList.remove('fas', 'fa-spinner', 'fa-pulse');
         sendButton.disabled = false;
-    }).catch((err) => {
-        if (err.name === 'TypeError') {
-            appendMessage('bot', 'Error : Check Your Api Key!');
-        } else {
-            appendMessage('bot', 'An error occurred.');
-        }
+    }).
         buttonIcon.classList.add('fa-solid', 'fa-paper-plane');
-        buttonIcon.classList.remove('fas', 'fa-spinner', 'fa-pulse');
-        sendButton.disabled = false;
-    });
+    buttonIcon.classList.remove('fas', 'fa-spinner', 'fa-pulse');
+    sendButton.disabled = false;
+});
 }
 
 function appendMessage(sender, message) {
