@@ -279,3 +279,14 @@ textarea#user-input::placeholder {
     cursor: not-allowed;
     transform: none;
 }
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+    .container {
+        height: 100dvh;
+    }
+
+    .chat-card {
+        margin: 10px;
+    }
+}
