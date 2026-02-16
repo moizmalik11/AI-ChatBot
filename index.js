@@ -6,6 +6,15 @@ const chatLog = document.getElementById('chat-log'),
     themeToggle = document.getElementById('theme-toggle'),
     scrollRegion = document.getElementById('scroll-region');
 
+// Theme setup
+(function initTheme() {
+    try {
+        const saved = localStorage.getItem('theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+        updateThemeIcon();
+    } catch (_) { }
+})();
+
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         const current = document.documentElement.getAttribute('data-theme') || 'dark';
