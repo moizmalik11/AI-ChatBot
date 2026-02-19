@@ -265,6 +265,20 @@ textarea#user-input::placeholder {
     height: 44px;
 }
 
+#send-button:hover {
+    background-color: var(--accent-700);
+    transform: translateY(-1px);
+}
+
+#send-button:active {
+    transform: translateY(0);
+}
+
+#send-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
 
 /* Responsive tweaks */
 @media (max-width: 640px) {
