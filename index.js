@@ -129,8 +129,7 @@ function appendMessage(sender, message) {
     messageElement.innerText = message;
 
     // add icons depending on who send message bot or user
-    if (sender === 'user') {
-        icon.classList.add('fa-regular', 'fa-user');
+
         iconElement.setAttribute('id', 'user-icon');
     } else {
         icon.classList.add('fa-solid', 'fa-robot');
