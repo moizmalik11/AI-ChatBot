@@ -117,16 +117,7 @@ function appendMessage(sender, message) {
     // change send button icon to loading using fontawesome
     buttonIcon.classList.remove('fa-solid', 'fa-paper-plane');
     buttonIcon.classList.add('fas', 'fa-spinner', 'fa-pulse');
-
-    const messageElement = document.createElement('div');
-    const iconElement = document.createElement('div');
-    const chatElement = document.createElement('div');
-    const icon = document.createElement('i');
-
-    chatElement.classList.add("chat-box", "row", sender === 'user' ? 'user-row' : 'bot-row');
-    iconElement.classList.add("icon");
-    messageElement.classList.add('bubble', sender);
-    messageElement.innerText = message;
+essageElement.innerText = message;
 
     // add icons depending on who send message bot or user
     if (sender === 'user') {
