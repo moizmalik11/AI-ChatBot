@@ -133,12 +133,4 @@ function appendMessage(sender, message) {
         iconElement.setAttribute('id', 'user-icon');
     } else {
         icon.classList.add('fa-solid', 'fa-robot');
-        iconElement.setAttribute('id', 'bot-icon');
-    }
-
-    iconElement.appendChild(icon);
-    chatElement.appendChild(iconElement);
-    chatElement.appendChild(messageElement);
-    chatLog.appendChild(chatElement);
-
-}
+        
