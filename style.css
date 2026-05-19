@@ -1,17 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-:root {
-    --bg: #0f1218;
-    --surface: #151a22;
-    --surface-2: #1c2230;
-    --text: #e8eaf0;
-    --muted: #aab0bd;
-    --border: #2a3242;
-    --accent: #4caf50;
-    --accent-700: #3e9142;
-
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
 
 [data-theme="light"] {
     --bg: #eef2f7;
@@ -280,13 +268,3 @@ textarea#user-input::placeholder {
     transform: none;
 }
 
-/* Responsive tweaks */
-@media (max-width: 640px) {
-    .container {
-        height: 100dvh;
-    }
-
-    .chat-card {
-        margin: 10px;
-    }
-}
