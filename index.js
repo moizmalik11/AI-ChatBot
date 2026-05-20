@@ -76,6 +76,26 @@ function sendMessage() {
     userInput.dispatchEvent(new Event('input'));
     sendButton.disabled = true;
 
+    // show send button microinteraction and spinner
+    sendButton.classList.add('btn-sending');
+    buttonIcon.classList.remove('fa-solid', 'fa-paper-plane');
+    buttonIcon.classList.add('fas', 'fa-spinner', 'fa-pulse');
+
+    // add a typing indicator bubble for bot
+    const typingEl = document.createElement('div');
+    const typingIcon = document.createElement('div');
+    const typingBubble = document.createElement('div');
+    typingEl.classList.add('chat-box', 'row', 'bot-row');
+    typingIcon.classList.add('icon');
+    typingIcon.setAttribute('id', 'bot-icon');
+    typingBubble.classList.add('bubble', 'bot', 'typing-bubble');
+    typingBubble.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+    typingEl.appendChild(typingIcon);
+    typingEl.appendChild(typingBubble);
+    chatLog.appendChild(typingEl);
+    // keep reference so we can remove it later
+
+
     const options = {
         method: 'POST',
         headers: {
@@ -95,12 +115,18 @@ function sendMessage() {
     };
     // official api : 'https://openai80.p.rapidapi.com/chat/completions';
     fetch('https://chatgpt53.p.rapidapi.com/', options).then((response) => response.json()).then((response) => {
+        // remove typing indicator
+        if (typingEl && typingEl.parentNode) typingEl.parentNode.removeChild(typingEl);
+        // append actual response
         appendMessage('bot', response.choices[0].message.content);
 
+        // restore send button
         buttonIcon.classList.add('fa-solid', 'fa-paper-plane');
         buttonIcon.classList.remove('fas', 'fa-spinner', 'fa-pulse');
         sendButton.disabled = false;
+        sendButton.classList.remove('btn-sending');
     }).catch((err) => {
+        if (typingEl && typingEl.parentNode) typingEl.parentNode.removeChild(typingEl);
         if (err.name === 'TypeError') {
             appendMessage('bot', 'Error : Check Your Api Key!');
         } else {
@@ -109,15 +135,12 @@ function sendMessage() {
         buttonIcon.classList.add('fa-solid', 'fa-paper-plane');
         buttonIcon.classList.remove('fas', 'fa-spinner', 'fa-pulse');
         sendButton.disabled = false;
+        sendButton.classList.remove('btn-sending');
     });
 }
 
 function appendMessage(sender, message) {
     info.style.display = "none";
-    // change send button icon to loading using fontawesome
-    buttonIcon.classList.remove('fa-solid', 'fa-paper-plane');
-    buttonIcon.classList.add('fas', 'fa-spinner', 'fa-pulse');
-
     const messageElement = document.createElement('div');
     const iconElement = document.createElement('div');
     const chatElement = document.createElement('div');
