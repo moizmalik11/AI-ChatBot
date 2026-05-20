@@ -13,32 +13,6 @@
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-[data-theme="light"] {
-    --bg: #eef2f7;
-    --surface: #ffffff;
-    --surface-2: #f6f7fb;
-    --text: #1a1f29;
-    --muted: #5d6b82;
-    --border: #e2e8f0;
-    --accent: #3a7cfd;
-    --accent-700: #2b62c9;
-    --bot: #f1f5ff;
-    --user: #e8f8ee;
-    --shadow: 0 10px 25px rgba(21, 34, 66, 0.12);
-}
-
-* {
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-html,
-body {
-    height: 100%;
-}
-
-body {
-    margin: 0;
     padding: 0;
     background: radial-gradient(1200px 600px at 20% -20%, rgba(76, 175, 80, 0.15), transparent 60%),
         radial-gradient(900px 500px at 110% 10%, rgba(58, 124, 253, 0.12), transparent 60%),
