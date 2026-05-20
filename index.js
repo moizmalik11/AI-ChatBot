@@ -142,4 +142,9 @@ function appendMessage(sender, message) {
     chatElement.appendChild(messageElement);
     chatLog.appendChild(chatElement);
 
+    // Scroll to the bottom smoothly
+    scrollRegion.scrollTo({
+        top: scrollRegion.scrollHeight,
+        behavior: 'smooth'
+    });
 }
