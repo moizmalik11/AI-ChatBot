@@ -1,12 +1,23 @@
-This project is a simple AI-powered chatbot built using JavaScript and an external AI API key (like OpenAI API).
-It takes user input, sends it to the API for processing, and displays the AI’s response in a clean, interactive chat interface.
+# ChatGPTBot — Next.js conversion
 
-🧩 Features:
+This workspace contains a Next.js conversion of the original ChatGPTBot static UI.
 
--> Real-time chat with AI
+Quick start:
 
--> Fetches responses using API key
+1. Install dependencies:
 
--> Simple, responsive chat interface (HTML/CSS/JS)
+```bash
+npm install
+```
 
--> Easy to customize and extend
+2. Run dev server:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:3000
+
+Notes:
+- The RapidAPI key in the example fetch call is a placeholder — replace with your real key or swap to the official OpenAI SDK.
+- Styles are in `styles/globals.css`.
