@@ -130,7 +130,7 @@ export default function Home() {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </Head>
 
-      <aside className="side-nav" aria-hidden>
+      <aside className="side-nav">
         <button className="nav-btn" onClick={handleNewChat} title="New chat"><i className="fa-solid fa-plus"></i></button>
         <button className="nav-btn" onClick={handleCompose} title="Compose"><i className="fa-solid fa-pen"></i></button>
         <button className="nav-btn" onClick={handleSearch} title="Search"><i className="fa-solid fa-magnifying-glass"></i></button>

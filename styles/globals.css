@@ -98,6 +98,8 @@ textarea#user-input::placeholder { color: var(--muted); }
 .nav-btn i { font-size: 16px; }
 .side-spacer { flex: 1; }
 .avatar { width: 34px; height: 34px; border-radius: 50%; margin-top: 6px; object-fit: cover; }
+/* make avatar clearly clickable */
+.avatar { cursor: pointer; border: 2px solid rgba(255,255,255,0.04); box-shadow: 0 6px 18px rgba(2,6,23,0.25); }
 
 .hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; }
 .hero-title { font-size: 40px; font-weight: 600; margin: 0 0 30px 0; color: var(--text); }
